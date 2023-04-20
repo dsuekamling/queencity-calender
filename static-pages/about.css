@@ -18,9 +18,8 @@ body {
 /* ---------------------------------------------------------------------------------------------
                                     Navbar
 -----------------------------------------------------------------------------------------------*/
-
 @import url('https://fonts.googleapis.com/css?family=Oswald:500');
-
+  
 .thx {
   position: fixed;
   left: 50%;
@@ -61,6 +60,10 @@ nav a {
   letter-spacing: 1px;
   position: relative;
   display: inline-block;
+}
+
+nav a.active {
+  color: #f47b06;
 }
 
 nav a:before {
@@ -121,6 +124,10 @@ nav a:hover:before {
   .links-container {
     text-align: right;
   }
+}
+
+section {
+  padding: 50px 0;
 }
 
 /* ---------------------------------------------------------------------------------------------
