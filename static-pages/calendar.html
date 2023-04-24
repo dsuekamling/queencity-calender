@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QueenCity Calendar</title>
     <link rel="stylesheet" href="contact.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+	  
 </head>
 <body>
     <nav>
@@ -25,7 +30,34 @@
       </nav>
       
     <section>
-
+      <div id='calendar'></div>
+    <script>
+      $(document).ready(function() {
+        $('#calendar').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+          },
+          defaultDate: '2023-04-22',
+          editable: true,
+          eventLimit: true,
+          events: [
+            {
+              title: 'Event 1',
+              start: '2023-04-22T10:00:00',
+              end: '2023-04-22T12:00:00'
+            },
+            {
+              title: 'Event 2',
+              start: '2023-04-23T14:00:00',
+              end: '2023-04-23T16:00:00',
+              url: 'http://google.com/',
+            }
+          ]
+        });
+      });
+    </script>
     </section>  
     
     <footer>
@@ -34,5 +66,6 @@
         <a href="https://tiktok.com"><img src="../images/tik-tok.png" id="socialimg"></a>
         <a href="https://twitter.com"><img src="../images/twitter.png" id="socialimg"></a>
     </footer>
+    <script src="calendar.js"></script>
 </body>
 </html>
