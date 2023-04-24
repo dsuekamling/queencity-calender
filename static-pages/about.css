@@ -148,7 +148,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: turquoise;
 }
 
 .hero h1 {
@@ -276,7 +276,7 @@ section {
 -----------------------------------------------------------------------------------------------*/
 
 footer {
-  background-color: grey;
+  background-color: turquoise;
   color: #fff;
   padding: 50px 0;
   text-align: center;
