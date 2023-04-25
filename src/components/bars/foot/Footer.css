@@ -1,0 +1,25 @@
+/* ---------------------------------------------------------------------------------------------
+                                      Footer
+-----------------------------------------------------------------------------------------------*/
+
+
+
+
+footer {
+    background-color: turquoise;
+    color: #fff;
+    padding: 50px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+#socialimg {
+    height:50px;
+    width: 50px;
+    margin:10px;
+}
