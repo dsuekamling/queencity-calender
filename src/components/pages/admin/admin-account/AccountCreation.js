@@ -1,12 +1,12 @@
 import React from "react";
 import './AccountCreation.css';
-import ClientNavbar from "../../../bars/client-navbar/ClientNavbar";
+import AdminNavbar from "../../../bars/admin-navbar/AdminNavbar";
 import Footer from "../../../bars/foot/footer";
 
 function AccountCreation() {
   return (
     <>
-    <ClientNavbar />
+    <AdminNavbar />
 
         <section className="account-section">
       <div className="form-container">

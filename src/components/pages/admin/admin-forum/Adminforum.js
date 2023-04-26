@@ -1,12 +1,12 @@
 import React from 'react';
 import './Adminforum.css';
-import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
+import AdminNavbar from "../../../bars/admin-navbar/AdminNavbar";
 import Footer from '../../../bars/foot/footer';
 
 function Adminforum() {
   return (
     <>
-      <ClientNavbar />
+      <AdminNavbar />
         <section className="forum-section">
       <h1>Community Event Forum</h1>
       <h2>Event Name</h2>
