@@ -1,37 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QueenCity Calendar</title>
-    <link rel="stylesheet" href="account.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QueenCity Calendar</title>
+  <link rel="stylesheet" href="account.css">
 </head>
 <body>
-    <nav>
-        <div class="navbar-container">
-          <div class="logo-container">
-            <img src="https://d368g9lw5ileu7.cloudfront.net/races/race68999-fulllogo.bDhJNM.png" alt="crown icon" class="crownimg" >
-          </div>
-          <div class="links-container">
-            <a href="./e-home.html" class="active" >Home</a>
-            <a href="./calendar.html">Calendar</a>
-            <a href="./forum.html">Make an Event</a>
-            <a href="../contact.html">Contact</a>
-            <a href="account.html">Account</a>
-          </div>
-        </div>
-      </nav>
-      
-    <section>
+  <nav>
+    <div class="navbar-container">
+      <div class="logo-container">
+        <img src="https://d368g9lw5ileu7.cloudfront.net/races/race68999-fulllogo.bDhJNM.png" alt="crown icon" class="crownimg">
+      </div>
+      <div class="links-container">
+        <a href="./e-home.html" class="active" >Home</a>
+        <a href="./calendar.html">Calendar</a>
+        <a href="./forum.html">Make an Event</a>
+        <a href="../contact.html">Contact</a>
+        <a href="account.html">Account</a>
+      </div>
+    </div>
+  </nav>
 
-    </section>  
-    
-    <footer>
-        <a href="https://www.facebook.com"><img src="../images/facebook.png" id="socialimg"></a>
-        <a href="https://instagram.com"><img src="../images/instagram.png" id="socialimg"></a>
-        <a href="https://tiktok.com"><img src="../images/tik-tok.png" id="socialimg"></a>
-        <a href="https://twitter.com"><img src="../images/twitter.png" id="socialimg"></a>
-    </footer>
+  <section class="account-section">
+    <div class="form-container">
+      <h1>Create an Account</h1>
+      <form action="" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+
+        <label for="business-name">Business Name:</label>
+        <input type="text" id="business-name" name="business-name" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="event-capacity">Event Capacity:</label>
+        <input type="text" id="event-capacity" name="event-capacity" required>
+
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <a href="https://www.facebook.com"><img src="../images/facebook.png" id="socialimg"></a>
+    <a href="https://instagram.com"><img src="../images/instagram.png" id="socialimg"></a>
+    <a href="https://tiktok.com"><img src="../images/tik-tok.png" id="socialimg"></a>
+    <a href="https://twitter.com"><img src="../images/twitter.png" id="socialimg"></a>
+  </footer>
 </body>
 </html>

@@ -9,6 +9,7 @@ import Contact from './components/pages/client/contact/Contact';
 import Login from './components/pages/client/login/Login';
 import Adminforum from './components/pages/admin/admin-forum/Adminforum';
 import Adminhome from './components/pages/admin/admin-home/Adminhome';
+import AccountCreation from './components/pages/admin/admin-account/AccountCreation';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Login />
       <Adminforum />
       <Adminhome />
+      <AccountCreation />
       
 
      

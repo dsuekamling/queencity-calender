@@ -1,25 +1,24 @@
+
 /* ---------------------------------------------------------------------------------------------
                                       Reset and Global Styles
 -----------------------------------------------------------------------------------------------*/
 
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Global styles */
 body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 /* ---------------------------------------------------------------------------------------------
                                       Navbar
 -----------------------------------------------------------------------------------------------*/
-
 @import url('https://fonts.googleapis.com/css?family=Oswald:500');
   
 .thx {
@@ -133,28 +132,85 @@ section {
 }
 
 
+/* ---------------------------------------------------------------------------------------------
+                                      Account Creation Page
+-----------------------------------------------------------------------------------------------*/
 
+.account-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.form-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  width: 90%;
+  max-width: 500px;
+  margin-top: 120px;
+}
+
+.form-container h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form label {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+form input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #f47b06;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #e25e02;
+}
 /* ---------------------------------------------------------------------------------------------
                                       Footer
 -----------------------------------------------------------------------------------------------*/
 
-
-
-
 footer {
-    background-color: turquoise;
-    color: #fff;
-    padding: 50px;
-    text-align: center;
+  background-color: turquoise;
+  color: #fff;
+  padding: 50px;
+  text-align: center;
 }
 
 footer p {
-    margin: 0;
-    font-size: 14px;
+  margin: 0;
+  font-size: 14px;
 }
 
 #socialimg {
-    height:50px;
-    width: 50px;
-    margin:10px;
+  height: 50px;
+  width: 50px;
+  margin: 10px;
 }
