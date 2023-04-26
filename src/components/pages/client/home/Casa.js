@@ -1,9 +1,13 @@
 import React from 'react';
 import './Casa.css'
+import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
+import Footer from '../../../bars/foot/footer';
 
 function Casa() {
   return (
     <>
+      <ClientNavbar />
+
       <div className="banner">
         <div className="welcome-box">
           <h1>Welcome to the Queen City!</h1>
@@ -48,6 +52,8 @@ function Casa() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </>
   );
 }

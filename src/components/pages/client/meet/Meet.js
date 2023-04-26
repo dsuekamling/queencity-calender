@@ -1,9 +1,11 @@
 import React from 'react';
 import './Meet.css';
-
+import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
+import Footer from '../../../bars/foot/footer';
 function Meet() {
   return (
     <>
+      <ClientNavbar />
       <section id="team">
         <h1>Meet the Team</h1>
 
@@ -43,6 +45,8 @@ function Meet() {
         </div>
         <p>We created Queen City Calendar to solve a problem we saw in our community. We noticed that there was no centralized source for information on local events, which made it difficult for people to find out about and attend events in the Charlotte area. We wanted to create a tool that would make it easy for locals to stay up to date on all the exciting events happening in our city.</p>
       </section>
+
+      <Footer />
     </>
   );
 }

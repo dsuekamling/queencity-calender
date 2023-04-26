@@ -1,9 +1,12 @@
 import React from "react";
 import './Forum.css';
-
+import ClientNavbar from "../../../bars/client-navbar/ClientNavbar";
+import Footer from "../../../bars/foot/footer";
 function Forum() {
   return (
-    <section className="forum-section">
+    <>
+          <ClientNavbar />
+          <section className="forum-section">
       <h1>Current Events Forum</h1>
       <div className="forum-container">
         <div className="forum-post">
@@ -36,6 +39,11 @@ function Forum() {
         </div>
       </div>
     </section>
+
+    <Footer />
+    
+    </>
+
   );
 }
 

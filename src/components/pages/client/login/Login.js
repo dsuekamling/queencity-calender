@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
-
+import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
+import Footer from '../../../bars/foot/footer';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +12,9 @@ function Login() {
   };
 
   return (
-    <section>
+    <>
+        <ClientNavbar />
+        <section>
       <div className="login-container">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
@@ -44,6 +47,11 @@ function Login() {
         </form>
       </div>
     </section>
+    <Footer />
+    
+    
+    </>
+
   );
 }
 

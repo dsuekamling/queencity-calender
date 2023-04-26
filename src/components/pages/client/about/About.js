@@ -1,9 +1,11 @@
 import React from 'react';
 import './About.css';
-
+import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
+import Footer from '../../../bars/foot/footer';
 function AboutPage() {
   return (
     <>
+      <ClientNavbar />
       <section className="hero">
         <div className="hero-overlay"></div>
         <div className="container">
@@ -45,6 +47,8 @@ function AboutPage() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </>
   );
 }

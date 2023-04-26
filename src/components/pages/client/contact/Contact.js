@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Contact.css';
+import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
+import Footer from '../../../bars/foot/footer';
 
 function Contact() {
   const [firstName, setFirstName] = useState('');
@@ -13,7 +15,9 @@ function Contact() {
   };
 
   return (
-    <section>
+    <>
+        <ClientNavbar />
+        <section>
       <div className="form-container">
         <h2>Contact Us</h2>
         <form onSubmit={handleSubmit}>
@@ -64,6 +68,11 @@ function Contact() {
         </form>
       </div>
     </section>
+
+    <Footer />
+    
+    </>
+
   );
 }
 

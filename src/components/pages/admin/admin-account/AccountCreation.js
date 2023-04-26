@@ -1,9 +1,14 @@
 import React from "react";
 import './AccountCreation.css';
+import ClientNavbar from "../../../bars/client-navbar/ClientNavbar";
+import Footer from "../../../bars/foot/footer";
 
 function AccountCreation() {
   return (
-    <section className="account-section">
+    <>
+    <ClientNavbar />
+
+        <section className="account-section">
       <div className="form-container">
         <h1>Create an Account</h1>
         <form action="" method="post">
@@ -32,6 +37,10 @@ function AccountCreation() {
         </form>
       </div>
     </section>
+    <Footer />
+    
+    </>
+
   );
 }
 

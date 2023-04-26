@@ -1,9 +1,13 @@
 import React from 'react';
 import './Adminforum.css';
+import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
+import Footer from '../../../bars/foot/footer';
 
 function Adminforum() {
   return (
-    <section className="forum-section">
+    <>
+      <ClientNavbar />
+        <section className="forum-section">
       <h1>Community Event Forum</h1>
       <h2>Event Name</h2>
       <div className="forum-container">
@@ -19,6 +23,10 @@ function Adminforum() {
         <button type="submit">Submit</button>
       </form>
     </section>
+    <Footer />
+    
+    </>
+
   );
 }
 

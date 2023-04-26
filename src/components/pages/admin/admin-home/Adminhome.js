@@ -1,9 +1,14 @@
 import React from 'react';
 import './Adminhome.css';
+import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
+import Footer from '../../../bars/foot/footer';
 
 function Adminhome() {
   return (
-    <div>
+
+    <>
+        <ClientNavbar />
+        <div>
       <div className="banner">
         <div className="welcome-box">
           <h1>Welcome Event Hosts!</h1>
@@ -26,6 +31,10 @@ function Adminhome() {
         </div>
       </section>
     </div>
+
+    
+    </>
+
   );
 }
 
