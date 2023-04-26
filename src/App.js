@@ -1,5 +1,5 @@
 import './App.css';
-import Navbar from './components/bars/nav/Navbar';
+import ClientNavbar from './components/bars/client-navbar/ClientNavbar';
 import Footer from './components/bars/foot/footer';
 import Casa from './components/pages/client/home/Casa';
 import About from './components/pages/client/about/About';
@@ -14,7 +14,7 @@ import AccountCreation from './components/pages/admin/admin-account/AccountCreat
 function App() {
   return (
     <>
-      <Navbar />
+      <ClientNavbar />
       <Casa />
       <Footer />
       <About />
@@ -25,15 +25,6 @@ function App() {
       <Adminforum />
       <Adminhome />
       <AccountCreation />
-      
-
-     
-      
-
-      
-
-    
-    
     
     </>
   );
