@@ -7,6 +7,8 @@ import Meet from './components/pages/client/meet/Meet';
 import Forum from './components/pages/client/forum/Forum';
 import Contact from './components/pages/client/contact/Contact';
 import Login from './components/pages/client/login/Login';
+import Adminforum from './components/pages/admin/admin-forum/Adminforum';
+import Adminhome from './components/pages/admin/admin-home/Adminhome';
 
 function App() {
   return (
@@ -19,6 +21,9 @@ function App() {
       <Forum />
       <Contact />
       <Login />
+      <Adminforum />
+      <Adminhome />
+      
 
      
       
