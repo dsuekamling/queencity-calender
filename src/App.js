@@ -24,7 +24,9 @@ function App() {
     <Route path= '/forum' element={<Forum />} />
     <Route path= '/contact' element={<Contact />} />
     <Route path= '/login' element={<Login />} />
-    <Route path= '/AdminCreation' element={<AccountCreation />} />
+    <Route path= '/AccountCreation' element={<AccountCreation />} />
+    <Route path= '/Adminhome' element={<Adminhome />} />
+    <Route path= '/Adminforum' element={<Adminforum />} />
 
 
     

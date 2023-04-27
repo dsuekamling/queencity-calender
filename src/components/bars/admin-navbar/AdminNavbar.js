@@ -15,7 +15,7 @@ function AdminNavbar() {
         <div className="links-container">
           <ul>
             <li>
-              <Link to='/' className='active'>Home</Link>
+              <Link to='/Adminhome' className='active'>Home</Link>
             </li>
             <li>
               <Link to='/about'>About</Link>
