@@ -1,28 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Login.css';
+import Axios from 'axios'
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Send login data to backend or perform other actions here
+  const [loginStatus, setLoginStatus] = useState("")
+  Axios.defaults.withCredentials = true;
+  const login = () =>{
+    Axios.post('http://localhost:3001/login', {
+      email: email,
+      password: password,
+    }).then((response)=>{
+      
+      if(response.data.message){
+        setLoginStatus(response.data.message)
+      } else{
+        setLoginStatus(response.data[0].email)
+      }
+    });
   };
+  useEffect(()=>(
+    Axios.get('http://localhost:3001/login').then((response)=>{
+      if (response.data.loggedIn == true){
+        setLoginStatus(response.data.user[0].email)
+      }
+    })
+  ),[])
 
   return (
     <section>
       <div className="login-container">
         <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="form-group">
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="email">Email:</label>
             <input
-              type="text"
-              id="username"
-              name="username"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               required
             />
           </div>
@@ -40,9 +58,10 @@ function Login() {
           <div className="forgot-password">
             <a href="./haha.html">Forgot your password?</a>
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" onClick={login}>Login</button>
         </form>
       </div>
+      {/* <h1>{loginStatus}</h1> */}
     </section>
   );
 }
