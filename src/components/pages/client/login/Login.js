@@ -1,32 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import './Login.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './Login.css'
 import Axios from 'axios'
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginStatus, setLoginStatus] = useState("")
+  const [loginStatus, setLoginStatus] = useState('');
   Axios.defaults.withCredentials = true;
-  const login = () =>{
-    Axios.post('http://localhost:3001/login', {
+  useEffect(() => {
+    axios.get('http://localhost:3001/login')
+      .then((response) => {
+        if (response.data.loggedIn === true) {
+          setLoginStatus(response.data.user[0].email);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleLogin = () => {
+    axios.post('http://localhost:3001/login', {
       email: email,
       password: password,
-    }).then((response)=>{
-      
-      if(response.data.message){
-        setLoginStatus(response.data.message)
-      } else{
-        setLoginStatus(response.data[0].email)
-      }
-    });
-  };
-  useEffect(()=>(
-    Axios.get('http://localhost:3001/login').then((response)=>{
-      if (response.data.loggedIn == true){
-        setLoginStatus(response.data.user[0].email)
-      }
     })
-  ),[])
+      .then((response) => {
+        if (response.data.message) {
+          setLoginStatus(response.data.message);
+        } else {
+          setLoginStatus(response.data[0].email);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <section>
@@ -58,10 +67,10 @@ function Login() {
           <div className="forgot-password">
             <a href="./haha.html">Forgot your password?</a>
           </div>
-          <button type="submit" onClick={login}>Login</button>
+          <button type="button" onClick={handleLogin}>Login</button>
         </form>
       </div>
-      {/* <h1>{loginStatus}</h1> */}
+      <h1>{loginStatus}</h1>
     </section>
   );
 }

@@ -15,15 +15,22 @@ import Login from './components/pages/client/login/Login';
 
 function App() {
   const [role, setRole]= useState("");
+  const [loginStatus, setLoginStatus] = useState('');
+
   Axios.defaults.withCredentials = true;
 
-  useEffect(()=>(
-    Axios.get('http://localhost:3001/login').then((response)=>{
-      if (response.data.loggedIn === true){
-        setRole(response.data.user[0].role);
-      }
-    })
-  ),[]);
+
+  useEffect(() => {
+    Axios.get('http://localhost:3001/login')
+      .then((response) => {
+        if (response.data.loggedIn === true) {
+          setLoginStatus(response.data.user[0].email);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
