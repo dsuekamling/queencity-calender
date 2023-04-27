@@ -65,3 +65,15 @@
   .forgot-password a:hover {
     text-decoration: underline;
   }
+
+  .background {
+    background-image: url('https://lp-cms-production.imgix.net/2022-02/Charlotte%20NC-shutterstock_1841167135%20RF%20Editorial.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+

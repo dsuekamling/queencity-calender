@@ -5,7 +5,7 @@
   .form-container {
     max-width: 500px;
     margin: 0 auto;
-    padding: 50px;
+    padding: 10px;
     background-color: #f7f7f7;
     border-radius: 5px;
     text-align: center;
@@ -15,7 +15,7 @@
     font-size: 32px;
     font-weight: 500;
     margin-bottom: 30px;
-    margin-top: 80px;
+    margin-top: 10px;
   }
   
   .form-group {
@@ -40,7 +40,7 @@
   }
   
   textarea {
-    height: 150px;
+    height: 100px;
   }
   
   button[type="submit"] {
@@ -58,3 +58,16 @@
   button[type="submit"]:hover {
     background-color: #e35b00;
   }
+
+  .background {
+    background-image: url('https://www.hellolanding.com/blog/wp-content/uploads/2021/09/image1-11-1200x800.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin-top:100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+ 

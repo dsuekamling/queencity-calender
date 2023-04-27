@@ -9,6 +9,7 @@ import Adminforum from './components/pages/admin/admin-forum/Adminforum';
 import Adminhome from './components/pages/admin/admin-home/Adminhome';
 import AccountCreation from './components/pages/admin/admin-account/AccountCreation';
 
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -23,6 +24,9 @@ function App() {
     <Route path= '/forum' element={<Forum />} />
     <Route path= '/contact' element={<Contact />} />
     <Route path= '/login' element={<Login />} />
+    <Route path= '/AdminCreation' element={<AccountCreation />} />
+
+
     
     </Routes>
     </BrowserRouter>
