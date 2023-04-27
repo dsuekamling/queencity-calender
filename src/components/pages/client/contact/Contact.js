@@ -18,7 +18,7 @@ function Contact() {
     <>
     <ClientNavbar />
     <section>
-  <div className="background">
+  <div className="background-contact">
     <div className="form-container">
       <h2>Contact Us</h2>
       <form onSubmit={handleSubmit}>
