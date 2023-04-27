@@ -12,6 +12,8 @@ import AccountCreation from './components/pages/admin/admin-account/AccountCreat
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Login from './components/pages/client/login/Login';
+import UserCalendar from './components/pages/client/calendar/UserCalendar';
+import AdminCalendar from './components/pages/admin/admin-calendar/AdminCalendar';
 
 function App() {
   const [role, setRole]= useState("");
@@ -43,6 +45,7 @@ function App() {
           <Meet />
           <Forum />
           <Contact />
+          <UserCalendar />
         </>
       )}
 
@@ -52,6 +55,7 @@ function App() {
           <Adminforum />  
           <Adminhome />  
           <AccountCreation />  
+          <AdminCalendar />
         </>
       )}
 
@@ -64,6 +68,7 @@ function App() {
           <Meet />
           <Forum />
           <Contact />
+          <UserCalendar />
           <Login />
         </>
       )}
