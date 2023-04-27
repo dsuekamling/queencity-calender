@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
-
 
 function ClientNavbar() {
   return (
@@ -14,7 +14,41 @@ function ClientNavbar() {
           />
         </div>
         <div className="links-container">
-          <a href="./index.html" className="active">
+          <ul>
+            <li>
+              <Link to='/' className='active'>Home</Link>
+            </li>
+            <li>
+              <Link to='/about'>About</Link>
+            </li>
+            <li>
+              <Link to='/Meet'>Meet</Link>
+            </li>
+            <li>
+              <Link to='/calendar'>Calendar</Link>
+            </li>
+            <li>
+              <Link to='/forum'>Forum</Link>
+            </li>
+            <li>
+              <Link to='/contact'>Contact</Link>
+            </li>
+            <li>
+              <Link to='/Login'>Login</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+export default ClientNavbar;
+
+
+
+
+/* <a href="./index.html" className="active">
             Home
           </a>
           <a href="./about.html">About</a>
@@ -23,10 +57,4 @@ function ClientNavbar() {
           <a href="./forum-page.html">Forum</a>
           <a href="./contact.html">Contact</a>
           <a href="login.html">Login</a>
-        </div>
-      </div>
-    </nav>
-  );
-}
-
-export default ClientNavbar;
+        </div> */

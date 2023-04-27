@@ -1,6 +1,4 @@
 import './App.css';
-import ClientNavbar from './components/bars/client-navbar/ClientNavbar';
-import Footer from './components/bars/foot/footer';
 import Casa from './components/pages/client/home/Casa';
 import About from './components/pages/client/about/About';
 import Meet from './components/pages/client/meet/Meet';
@@ -11,23 +9,30 @@ import Adminforum from './components/pages/admin/admin-forum/Adminforum';
 import Adminhome from './components/pages/admin/admin-home/Adminhome';
 import AccountCreation from './components/pages/admin/admin-account/AccountCreation';
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+
 function App() {
   return (
-    <>
-      <ClientNavbar />
-      <Casa />
-      <Footer />
-      <About />
-      <Meet />
-      <Forum />
-      <Contact />
-      <Login />
-      <Adminforum />
-      <Adminhome />
-      <AccountCreation />
+    <div className= 'App'>
+    <BrowserRouter>
+    <Routes>
+    <Route path= '/' element={<Casa />} />
+    <Route path= '/about' element={<About />} />
+    <Route path= '/meet' element={<Meet />} />
+    <Route path= '/forum' element={<Forum />} />
+    <Route path= '/contact' element={<Contact />} />
+    <Route path= '/login' element={<Login />} />
     
-    </>
+    </Routes>
+    </BrowserRouter>
+  </div>
+
   );
 }
 
 export default App;
+
+
+
+
