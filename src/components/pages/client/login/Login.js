@@ -43,7 +43,7 @@ function Login() {
                     />
                   </div>
                   <div className="forgot-password">
-                    <a src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODY4OTM1MGY0OGY5ZmJhZjZmMGM1NjlkYzBmNmFmNzM5ZWRkMjc4MSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/xUA7aM09ByyR1w5YWc/giphy.gif">Forgot your password?</a>
+                    <Link to='https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODY4OTM1MGY0OGY5ZmJhZjZmMGM1NjlkYzBmNmFmNzM5ZWRkMjc4MSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/xUA7aM09ByyR1w5YWc/giphy.gif'>Forgot your password?</Link>
                     <br></br>
                     <br></br>
                     <Link to='/AccountCreation'>New? Create an Account</Link>
