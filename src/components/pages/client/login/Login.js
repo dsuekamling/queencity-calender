@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { checkLoggedIn, login, logout } from '../../../../server/auth';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import axios from '../../../../api/axios';
+import AuthContext from '../../../../context/AuthProvider';
+
+const LOGIN_URL = '/auth';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // <-- new state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const { setAuth } = useContext(AuthContext);
+  const errRef = useRef();
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -20,48 +26,56 @@ function Login() {
       }
     }
   }, []);
-  
-    
-  useEffect(() => {
-    const user = checkLoggedIn();
-    if (user && user.email) {
-      setEmail(user.email);
-      setPassword('********');
-      setIsLoggedIn(true);
-    }
-  }, []);
-  
 
-  const handleLogin = () => {
-    login(email, password)
-      .then((user) => {
-        if (user) {
-          setEmail(user.email);
-          localStorage.setItem('authToken', user.token);
-          setIsLoggedIn(true);
-          navigate('/');
-        } else {
-          setLoginStatus('Incorrect email or password');
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ email, password }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      );
+
+      const { accessToken, roles } = response?.data;
+      setAuth({ email, password, roles, accessToken });
+      setIsLoggedIn(true);
+      setEmail('');
+      setPassword('');
+    } catch (err) {
+      if (!err?.response) {
+        setLoginStatus('No Server Response');
+      } else if (err.response?.status === 400) {
+        setLoginStatus('Missing Email or Password');
+      } else if (err.response?.status === 401) {
+        setLoginStatus('Unauthorized');
+      } else {
+        setLoginStatus('Login Failed');
+      }
+      errRef.current.focus();
+    }
   };
-  
-  
+
   const handleLogout = () => {
     logout();
     localStorage.removeItem('authToken');
-    setEmail('');
     setIsLoggedIn(false);
   };
-  
+
   return (
     <section>
       <div className="login-container">
         <h2>Login</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input
@@ -70,7 +84,7 @@ function Login() {
               name="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              readOnly={Boolean(email)}
+              // readOnly={Boolean(email)}
               required
             />
           </div>
@@ -88,14 +102,17 @@ function Login() {
           <div className="forgot-password">
             <a href="./haha.html">Forgot your password?</a>
           </div>
-          {isLoggedIn ? ( // <-- check the isLoggedIn state
+          {isLoggedIn ? (
             <button type="button" onClick={handleLogout}>
               Logout
             </button>
           ) : (
-            <button type="button" onClick={handleLogin}>
-              Login
-            </button>
+            <button type="submit">Login</button>
+          )}
+          {loginStatus && (
+            <p ref={errRef} className="errmsg" aria-live="assertive">
+              {loginStatus}
+            </p>
           )}
         </form>
       </div>

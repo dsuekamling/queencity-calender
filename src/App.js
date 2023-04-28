@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      
         <ClientNavbar onLogout={handleLogout} />
 
         <Routes>
@@ -72,7 +72,7 @@ function App() {
         </Routes>
 
         <Footer />
-      </BrowserRouter>
+      
     </div>
   );
 }
