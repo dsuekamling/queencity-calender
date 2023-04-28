@@ -7,26 +7,26 @@ function Adminforum() {
   return (
     <>
       <AdminNavbar />
-        <section className="forum-section">
-      <h1>Community Event Forum</h1>
-      <h2>Event Name</h2>
-      <div className="forum-container">
-        <div className="forum-post">
-          <h3>Post Title</h3>
-          <p>Post Content</p>
+      <section className="forum-section">
+        <h2>Create a New Event</h2>
+        <div className="forum-container">
+          <div className="forum-post">
+            <label htmlFor="event-date">Event Name:</label>
+            <input type="text" placeholder="Event Name" />
+            <label htmlFor="event-date">Host:</label>
+            <input type="text" placeholder="Host" />
+            <label htmlFor="event-date">Location:</label>
+            <input type="text" placeholder="Location" />
+            <label htmlFor="event-date">Event Date:</label>
+            <input type="date" id="event-date" name="event-date" />
+            <label htmlFor="event-date">Event Information:</label>
+            <textarea placeholder="Post Content" />
+            <button type="submit">Submit</button>
+          </div>
         </div>
-      </div>
-      <form className="forum-form">
-        <h3>Create a New Post</h3>
-        <input type="text" placeholder="Post Title" />
-        <textarea placeholder="Post Content" />
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-    <Footer />
-    
+      </section>
+      <Footer />
     </>
-
   );
 }
 
