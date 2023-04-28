@@ -55,10 +55,10 @@ function App() {
 
           {role === "admin" && (
             <>
-              <Route path="/admin/forum" element={<Adminforum />} />
-              <Route path="/admin/home" element={<Adminhome />} />
-              <Route path="/admin/account-creation" element={<AccountCreation />} />
-              <Route path="/admin/calendar" element={<AdminCalendar />} />
+              <Route path="/adminforum" element={<Adminforum />} />
+              <Route path="/adminhome" element={<Adminhome />} />
+              <Route path="/adminaccount-creation" element={<AccountCreation />} />
+              <Route path="/admincalendar" element={<AdminCalendar />} />
             </>
           )}
 
