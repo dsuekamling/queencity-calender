@@ -1,31 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { checkLoggedIn, login, logout } from '../../../../server/auth';
 import './Login.css';
-import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
-import Footer from '../../../bars/foot/footer';
+import { useNavigate } from 'react-router-dom';
+
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginStatus, setLoginStatus] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // <-- new state
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Send login data to backend or perform other actions here
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      const user = checkLoggedIn(authToken);
+      if (user) {
+        setEmail(user.email);
+        setIsLoggedIn(true);
+      }
+    }
+  }, []);
+  
+    
+  useEffect(() => {
+    const user = checkLoggedIn();
+    if (user && user.email) {
+      setEmail(user.email);
+      setPassword('********');
+      setIsLoggedIn(true);
+    }
+  }, []);
+  
+
+  const handleLogin = () => {
+    login(email, password)
+      .then((user) => {
+        if (user) {
+          setEmail(user.email);
+          localStorage.setItem('authToken', user.token);
+          setIsLoggedIn(true);
+          navigate('/');
+        } else {
+          setLoginStatus('Incorrect email or password');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
+  
+  
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem('authToken');
+    setEmail('');
+    setIsLoggedIn(false);
+  };
+  
   return (
-    <>
-        <ClientNavbar />
-        <section>
+    <section>
       <div className="login-container">
         <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="form-group">
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="email">Email:</label>
             <input
-              type="text"
-              id="username"
-              name="username"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              readOnly={Boolean(email)}
               required
             />
           </div>
@@ -43,15 +88,18 @@ function Login() {
           <div className="forgot-password">
             <a href="./haha.html">Forgot your password?</a>
           </div>
-          <button type="submit">Login</button>
+          {isLoggedIn ? ( // <-- check the isLoggedIn state
+            <button type="button" onClick={handleLogout}>
+              Logout
+            </button>
+          ) : (
+            <button type="button" onClick={handleLogin}>
+              Login
+            </button>
+          )}
         </form>
       </div>
     </section>
-    <Footer />
-    
-    
-    </>
-
   );
 }
 

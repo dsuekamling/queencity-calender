@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import '../../client/calendar/Calendar.css'
 
 const AdminCalendar = () => {
   const [events, setEvents] = useState([]);
