@@ -21,12 +21,13 @@ function Casa() {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices auctor arcu in fringilla. Integer lobortis justo ac lobortis luctus.</p>
           </div>
         </div>
+        <img className="homeimg" src="https://media.radissonhotelsamericas.com/image/destination-pagesus/localattraction/20828-139885-f63245703_3xl.jpg?impolicy=HomeHero" alt="A park in Charlotte" />
         <div className="split">
           <div className="split-text">
             <h2>Explore what Charlotte has to offer</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices auctor arcu in fringilla. Integer lobortis justo ac lobortis luctus.</p>
           </div>
-          <img className="homeimg" src="https://media.radissonhotelsamericas.com/image/destination-pagesus/localattraction/20828-139885-f63245703_3xl.jpg?impolicy=HomeHero" alt="A park in Charlotte" />
+          
         </div>
         <div className="card-container">
           <div className="card-casa">

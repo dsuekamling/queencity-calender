@@ -1,11 +1,11 @@
 import React from 'react';
-import './About.css';
-import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
+import './AdminAbout.css';
+import AdminNavbar from '../../../bars/admin-navbar/AdminNavbar';
 import Footer from '../../../bars/foot/footer';
-function AboutPage() {
+function AdminAbout() {
   return (
     <>
-      <ClientNavbar />
+      <AdminNavbar />
       <section className="hero">
         <div className="hero-overlay"></div>
         <div className="container">
@@ -53,4 +53,4 @@ function AboutPage() {
   );
 }
 
-export default AboutPage;
+export default AdminAbout;

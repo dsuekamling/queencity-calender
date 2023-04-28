@@ -18,13 +18,13 @@ function AdminNavbar() {
               <Link to='/Adminhome' className='active'>Home</Link>
             </li>
             <li>
-              <Link to='/about'>About</Link>
+              <Link to='/AdminAbout'>About</Link>
             </li>
             <li>
               <Link to='/calendar'>Calendar</Link>
             </li>
             <li>
-              <Link to='/Adminforum'>Forum</Link>
+              <Link to='/Adminforum'>Create an Event</Link>
             </li>
             <li>
               <Link to='/contact'>Contact</Link>
