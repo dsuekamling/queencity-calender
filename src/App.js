@@ -9,7 +9,7 @@ import Adminforum from './components/pages/admin/admin-forum/Adminforum';
 import Adminhome from './components/pages/admin/admin-home/Adminhome';
 import AccountCreation from './components/pages/admin/admin-account/AccountCreation';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import ClientNavbar from './components/bars/client-navbar/ClientNavbar';
 import Footer from './components/bars/foot/footer';
 import UserCalendar from './components/pages/client/calendar/UserCalendar';
@@ -18,10 +18,27 @@ import AdminCalendar from './components/pages/admin/admin-calendar/AdminCalendar
 function App() {
   const [role, setRole] = useState("");
 
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setRole(storedRole);
+    }
+  }, []);
+
+  const handleLogin = (newRole) => {
+    setRole(newRole);
+    localStorage.setItem("role", newRole);
+  };
+
+  const handleLogout = () => {
+    setRole("");
+    localStorage.removeItem("role");
+  };
+
   return (
     <div className="App">
       <BrowserRouter>
-        <ClientNavbar />
+        <ClientNavbar onLogout={handleLogout} />
 
         <Routes>
           <Route path="/" element={<Casa />} />
@@ -49,7 +66,7 @@ function App() {
             <>
               <Route path="/forum" element={<Forum />} />
               <Route path="/calendar" element={<UserCalendar />} />
-              <Route path="/login" element={<Login setRole={setRole} />} />
+              <Route path="/login" element={<Login onLogin={handleLogin} />} />
             </>
           )}
         </Routes>
