@@ -25,33 +25,36 @@ const db = mysql.createConnection({
 });
 
 app.get("/login", (req, res) => {
-  if (req.session.user) {
-    res.send({ loggedIn: true, user: req.session.user });
+  const email = req.query.email || req.body.email;
+  const password = req.query.password || req.body.password;
+
+  if (!email || !password) {
+    res.status(400).send({ message: "Email and password are required" });
   } else {
-    res.send({ loggedIn: false });
+    db.query(
+      "SELECT id, email, role FROM users WHERE email = ? AND password = ?",
+      [email, password],
+      (err, result) => {
+        if (err) {
+          res.send({ err: err });
+        }
+
+        if (result.length > 0) {
+          req.session.user = result[0];
+          res.send({
+            loggedIn: true,
+            user: {
+              id: result[0].id,
+              email: result[0].email,
+              role: result[0].role
+            }
+          });
+        } else {
+          res.send({ message: "Wrong email/password combination" });
+        }
+      }
+    );
   }
-});
-
-app.post('/login', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-
-  db.query(
-    "SELECT * FROM users WHERE email = ? AND password = ?",
-    [email, password],
-    (err, result) => {
-      if (err) {
-        res.send({ err: err });
-      }
-
-      if (result.length > 0) {
-        req.session.user = result[0];
-        res.send(result);
-      } else {
-        res.send({ message: "Wrong email/password combination" });
-      }
-    }
-  );
 });
 
 app.get('/logout', (req, res) => {
