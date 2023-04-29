@@ -13,36 +13,84 @@ import DiscSymph from './components/pages/client/forum/discussion/DiscSymph/Disc
 
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import ClientNavbar from './components/bars/client-navbar/ClientNavbar';
+import Footer from './components/bars/foot/footer';
+import UserCalendar from './components/pages/client/calendar/UserCalendar';
+import AdminCalendar from './components/pages/admin/admin-calendar/AdminCalendar';
+
+
+
+
 
 
 function App() {
+
+  const [role, setRole] = useState("");
+
+useEffect(() => {
+  const storedRole = localStorage.getItem("role");
+  if (storedRole) {
+    setRole(storedRole);
+  }
+}, []);
+
+const handleLogin = (newRole) => {
+  setRole(newRole);
+  localStorage.setItem("role", newRole);
+};
+
+const handleLogout = () => {
+  setRole("");
+  localStorage.removeItem("role");
+};
+
+  
+
+
   return (
-    <div className= 'App'>
-    <BrowserRouter>
-    <Routes>
-    <Route path= '/' element={<Casa />} />
-    <Route path= '/about' element={<About />} />
-    <Route path= '/meet' element={<Meet />} />
-    <Route path= '/forum' element={<Forum />} />
-    <Route path= '/contact' element={<Contact />} />
-    <Route path= '/login' element={<Login />} />
-    <Route path= '/AccountCreation' element={<AccountCreation />} />
-    <Route path= '/Adminhome' element={<Adminhome />} />
-    <Route path= '/Adminforum' element={<Adminforum />} />
-    <Route path= '/AdminAbout' element={<AdminAbout />} />
-    <Route path= '/DiscSymph' element={<DiscSymph />} />
+    <div className="App">
+      
+        <ClientNavbar onLogout={handleLogout} />
 
+        <Routes>
+          <Route path="/" element={<Casa />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/meet" element={<Meet />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/DiscSymph" element={<DiscSymph />} />
+          <Route path="/Login" element={<Login />} />
+          
 
-    
-    </Routes>
-    </BrowserRouter>
-  </div>
+          {role === "user" && (
+            <>
+              <Route path="/forum" element={<Forum />} />
+              <Route path="/calendar" element={<UserCalendar />} />
+            </>
+          )}
 
+          {role === "admin" && (
+            <>
+              <Route path="/adminforum" element={<Adminforum />} />
+              <Route path="/adminhome" element={<Adminhome />} />
+              <Route path="/adminaccount-creation" element={<AccountCreation />} />
+              <Route path="/admincalendar" element={<AdminCalendar />} />
+            </>
+          )}
+
+          {!role && (
+            <>
+              <Route path="/forum" element={<Forum />} />
+              <Route path="/calendar" element={<UserCalendar />} />
+              <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            </>
+          )}
+        </Routes>
+
+        
+      
+    </div>
   );
 }
 
 export default App;
-
-
-
-
