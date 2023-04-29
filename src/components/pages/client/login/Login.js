@@ -1,86 +1,114 @@
 import { useState, useEffect, useContext, useRef } from 'react';
-import { checkLoggedIn, login, logout } from '../../../../server/auth';
+// import { checkLoggedIn, login, logout } from '../../../../server/auth';
 
 import './Login.css';
 import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
 import Footer from '../../../bars/foot/footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import axios from '../../../../api/axios';
-import AuthContext from '../../../../context/AuthProvider';
-export default Login;
+// import AuthContext from '../../../../context/AuthProvider';
 
-function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const LOGIN_URL = 'http://localhost:3001/login';
 
-  const LOGIN_URL = '/auth';
-
-
-  const [email, setEmail] = useState('');
-  const [loginStatus, setLoginStatus] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Login = () => {
   const navigate = useNavigate();
-  const { setAuth } = useContext(AuthContext);
-  const errRef = useRef();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const [user, setUser] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken) {
-      const user = checkLoggedIn(authToken);
-      if (user) {
-        setEmail(user.email);
-        setIsLoggedIn(true);
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+      // Check user role and redirect to appropriate route
+      if (foundUser.role === "admin") {
+        navigate("/adminhome");
+      } else if (foundUser.role === "user") {
+        navigate("/");
       }
     }
   }, []);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/');
+  // logout the user
+  const handleLogout = async () => {
+    try {
+      await axios.get('http://localhost:3001/logout', { withCredentials: true });
+      setUser(null);
+      setEmail("");
+      setPassword("");
+      localStorage.clear();
+      navigate('/login', { replace: true });
+    } catch (err) {
+      console.error(err);
     }
-  }, [isLoggedIn, navigate]);
+  };
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const user = { email, password };
     try {
-      const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ email, password }),
+      const response = await axios.post(LOGIN_URL,
+        JSON.stringify(user),
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
+          withCredentials: true
         }
       );
-
-      const { accessToken, roles } = response?.data;
-      setAuth({ email, password, roles, accessToken });
-      setIsLoggedIn(true);
-      setEmail('');
-      setPassword('');
+      setUser(response?.data);
+      localStorage.setItem("user", JSON.stringify(response?.data));
+      // Check user role and redirect to appropriate route
+      if (response?.data?.role === "admin") {
+        navigate("/adminhome");
+      } else if (response?.data?.role === "user") {
+        navigate("/");
+      } else {
+        navigate(from, { replace: true });
+      }
     } catch (err) {
       if (!err?.response) {
-        setLoginStatus('No Server Response');
+        setErrMsg('No Server Response');
       } else if (err.response?.status === 400) {
-        setLoginStatus('Missing Email or Password');
+        setErrMsg('Missing Email or Password');
       } else if (err.response?.status === 401) {
-        setLoginStatus('Unauthorized');
+        setErrMsg('Unauthorized');
       } else {
-        setLoginStatus('Login Failed');
+        setErrMsg('Login Failed');
       }
-      errRef.current.focus();
     }
   };
-
-  const handleLogout = () => {
-    logout();
-    localStorage.removeItem('authToken');
-    setIsLoggedIn(false);
-  };
-
+  
+  if (user) {
+    const userRole = user.role;
+  
+    if (userRole === 'admin') {
+      return (
+        <div className="login-container">
+          {user.email} is logged in as admin
+          <button onClick={handleLogout}>logout</button>
+          <Link to="/adminhome">Go to Admin Page</Link>
+        </div>
+      );
+    } else {
+      return (
+        <div className="login-container">
+          {user.email} is logged in
+          <button onClick={handleLogout}>logout</button>
+          <Link to="/">Go to Home Page</Link>
+        </div>
+      );
+    }
+  }
+  
   return (
     <>
       <ClientNavbar />
@@ -95,8 +123,8 @@ function Login() {
                   type="text"
                   id="username"
                   name="username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   required
                 />
               </div>
@@ -133,3 +161,4 @@ function Login() {
 }
 
 
+export default Login;
