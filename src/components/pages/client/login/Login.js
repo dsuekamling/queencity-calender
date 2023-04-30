@@ -1,15 +1,9 @@
-import { useState, useEffect} from 'react';
-// import { checkLoggedIn, login, logout } from '../../../../server/auth';
-
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import axios from '../../../../api/axios';
 import './Login.css';
 import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
 import Footer from '../../../bars/foot/footer';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-
-
-// import { useNavigate } from 'react-router-dom';
-import axios from '../../../../api/axios';
-// import AuthContext from '../../../../context/AuthProvider';
 
 const LOGIN_URL = 'http://localhost:3001/login';
 
@@ -18,26 +12,27 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
     if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
-      // Check user role and redirect to appropriate route
-      if (foundUser.role === "admin") {
-        navigate("/adminhome");
-      } else if (foundUser.role === "user") {
-        navigate("/");
-      }
+      setUser(loggedInUser);
+      navigateToCorrectRoute(loggedInUser);
     }
-  }, []);
+  }, [navigate]);
 
-  // logout the user
+  const navigateToCorrectRoute = (loggedInUser) => {
+    if (loggedInUser.role === "admin") {
+      navigate("/adminhome");
+    } else if (loggedInUser.role === "user") {
+      navigate("/");
+    }
+  }
+
   const handleLogout = async () => {
     try {
       await axios.get('http://localhost:3001/logout', { withCredentials: true });
@@ -64,14 +59,7 @@ const Login = () => {
       );
       setUser(response?.data);
       localStorage.setItem("user", JSON.stringify(response?.data));
-      // Check user role and redirect to appropriate route
-      if (response?.data?.role === "admin") {
-        navigate("/adminhome");
-      } else if (response?.data?.role === "user") {
-        navigate("/");
-      } else {
-        navigate(from, { replace: true });
-      }
+      navigateToCorrectRoute(response?.data);
     } catch (err) {
       if (!err?.response) {
         setErrMsg('No Server Response');
@@ -84,31 +72,21 @@ const Login = () => {
       }
     }
   };
-  
-  
-  if (user) {
-    const userRole = user.role;
-    const userName = user.email;
 
-    if (userRole === "admin") {
-      return (
-        <div className="login-container">
-          {userName} is logged in as admin
-          <button onClick={handleLogout}>logout</button>
-          <Link to="/adminhome">Go to Admin Page</Link>
-        </div>
-      );
-    } else {
-      return (
-        <div className="login-container">
-          {userName} is logged in
-          <button onClick={handleLogout}>logout</button>
-          <Link to="/">Go to Home Page</Link>
-        </div>
-      );
-    }
+  if (user) {
+    console.log(user); // add this line to check user information
+    const userName = user[0].email;
+    const userRole = user[0].role;
+    return (
+      <div className="login-container">
+        {userName} is logged in{userRole === "admin" && " as admin"}
+        <button onClick={handleLogout}>logout</button>
+        <Link to={userRole === "admin" ? "/adminhome" : "/"}>Go to {userRole === "admin" ? "Admin Page" : "Home Page"}</Link>
+      </div>
+    );
   }
   
+
   return (
     <>
       <ClientNavbar />

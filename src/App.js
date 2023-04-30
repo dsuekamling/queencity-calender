@@ -10,7 +10,7 @@ import Adminhome from './components/pages/admin/admin-home/Adminhome';
 import AccountCreation from './components/pages/admin/admin-account/AccountCreation';
 import AdminAbout from './components/pages/admin/admin-about/AdminAbout';
 import DiscSymph from './components/pages/client/forum/discussion/DiscSymph/DiscSymph';
-
+import { UserProvider } from './context/UserContext';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {useState, useEffect} from 'react';
@@ -52,7 +52,7 @@ const handleLogout = () => {
     <div className="App">
       
         <ClientNavbar onLogout={handleLogout} />
-
+      
         <Routes>
           <Route path="/" element={<Casa />} />
           <Route path="/about" element={<About />} />
@@ -62,14 +62,14 @@ const handleLogout = () => {
           <Route path="/Login" element={<Login />} />
           
 
-          {role === "user" && (
+          {role[0] === "user" && (
             <>
               <Route path="/forum" element={<Forum />} />
               <Route path="/calendar" element={<UserCalendar />} />
             </>
           )}
 
-          {role === "admin" && (
+          {role[0] === "admin" && (
             <>
               <Route path="/adminforum" element={<Adminforum />} />
               <Route path="/adminhome" element={<Adminhome />} />
