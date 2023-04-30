@@ -20,18 +20,20 @@ import UserCalendar from './components/pages/client/calendar/UserCalendar';
 import AdminCalendar from './components/pages/admin/admin-calendar/AdminCalendar';
 
 function App() {
-  const [role, setRole] = useState([]);
+  const [role, setRole] = useState('');
 
   useEffect(() => {
-    const storedRole = localStorage.getItem('role');
+    const storedRole = JSON.parse(localStorage.getItem('user'));
     if (storedRole) {
-      setRole(storedRole[0].split(','));
+      const role = storedRole[0].role;
+      setRole(role);
+      console.log('Role from local storage:', role);
     }
   }, []);
 
   return (
     <div className="App">
-      <ClientNavbar />
+      {/* <ClientNavbar /> */}
       <Routes>
         <Route path="/" element={<Casa />} />
         <Route path="/about" element={<About />} />

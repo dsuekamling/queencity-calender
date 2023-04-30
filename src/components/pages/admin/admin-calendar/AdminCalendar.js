@@ -1,32 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import '../../client/calendar/Calendar.css'
 
 const AdminCalendar = () => {
-  const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState([]);
 
-  const handleDateSelect = (selectInfo) => {
-    const title = prompt("Enter a title for your event");
-    if (title) {
-      setEvents([
-        ...events,
-        {
-          title,
-          start: selectInfo.startStr,
-          end: selectInfo.endStr,
-        },
-      ]);
-    }
+  useEffect(() => {
+    fetch('http://localhost:3001/events')
+      .then(response => response.json())
+      .then(data => {
+        setEvents(data);
+      })
+      .catch(error => console.error(error));
+  }, []);
+
+  const handleEventClick = (clickInfo) => {
+    alert(clickInfo.event.title);
   };
+//   console.log(events);
 
   return (
     <FullCalendar
       plugins={[dayGridPlugin]}
       initialView="dayGridMonth"
-      selectable={true}
-      dateClick={handleDateSelect}
-      events={events}
+      events={events.map((event) => ({
+        id: event.id,
+        title: event.title,
+        start: event.start,
+        end: event.end,
+        url: event.url
+      }))}
+    //   eventClick={handleEventClick}
     />
   );
 };

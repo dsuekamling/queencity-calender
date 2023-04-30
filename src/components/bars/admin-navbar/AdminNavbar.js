@@ -21,7 +21,7 @@ function AdminNavbar() {
               <Link to='/AdminAbout'>About</Link>
             </li>
             <li>
-              <Link to='/calendar'>Calendar</Link>
+              <Link to='/Admincalendar'>Calendar</Link>
             </li>
             <li>
               <Link to='/Adminforum'>Create an Event</Link>
