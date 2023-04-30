@@ -17,9 +17,7 @@ const AdminCalendar = () => {
       .catch(error => console.error(error));
   }, []);
 
-  const handleEventClick = (clickInfo) => {
-    alert(clickInfo.event.title);
-  };
+ 
 //   console.log(events);
 
   return (
