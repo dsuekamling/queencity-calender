@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Contact.css';
 import ClientNavbar from '../../../bars/client-navbar/ClientNavbar';
 import Footer from '../../../bars/foot/footer';
+import axios from 'axios';
 
 function Contact() {
   const [firstName, setFirstName] = useState('');
@@ -9,9 +10,25 @@ function Contact() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Send form data to backend or perform other actions here
+    try {
+      await axios.post('http://localhost:3001/contacts', {
+        firstName,
+        lastName,
+        email,
+        message,
+      });
+      // Reset form state on successful submission
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setMessage('');
+      alert('Message sent successfully!');
+    } catch (error) {
+      alert('Failed to send message');
+      console.error(error);
+    }
   };
 
   return (
