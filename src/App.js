@@ -20,7 +20,10 @@ import UserCalendar from './components/pages/client/calendar/UserCalendar';
 import AdminCalendar from './components/pages/admin/admin-calendar/AdminCalendar';
 
 function App() {
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState(localStorage.getItem('userRole') || '');
+
+
+  const userRole = localStorage.getItem("userRole");
 
   useEffect(() => {
     const storedRole = JSON.parse(localStorage.getItem('user'));

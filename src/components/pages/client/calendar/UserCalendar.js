@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import './Calendar.css'
+import Footer from "../../../bars/foot/footer";
+import ClientNavbar from "../../../bars/client-navbar/ClientNavbar";
 
 const UserCalendar = () => {
   const [events, setEvents] = useState([]);
@@ -21,6 +23,8 @@ const UserCalendar = () => {
 //   console.log(events);
 
   return (
+	<>
+	<ClientNavbar />
     <FullCalendar
       plugins={[dayGridPlugin]}
       initialView="dayGridMonth"
@@ -33,6 +37,8 @@ const UserCalendar = () => {
       }))}
     //   eventClick={handleEventClick}
     />
+	<Footer/>
+	</>
   );
 };
 

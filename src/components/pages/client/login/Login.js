@@ -59,6 +59,7 @@ const Login = () => {
       );
       setUser(response?.data);
       localStorage.setItem("user", JSON.stringify(response?.data));
+      localStorage.setItem("userRole", response?.data[0].role); // store user's role in localStorage
       navigateToCorrectRoute(response?.data);
     } catch (err) {
       if (!err?.response) {
@@ -74,7 +75,7 @@ const Login = () => {
   };
 
   if (user) {
-    console.log(user); // add this line to check user information
+    // console.log(user); // add this line to check user information
     const userName = user[0].email;
     const userRole = user[0].role;
     return (
