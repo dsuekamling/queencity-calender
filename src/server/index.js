@@ -24,6 +24,50 @@ const db = mysql.createConnection({
   database: "Capstone",
 });
 
+// retrieve events
+app.get('/events', (req, res) => {
+	db.query(
+	  "SELECT id, title, start, end FROM events",
+	  (err, result) => {
+		if (err) {
+		  console.log(err);
+		  res.status(500).send('Error retrieving events');
+		} else {
+		  const events = result.map(event => ({
+			id: event.id,
+			title: event.title,
+			start: event.start.toISOString(),
+			end: event.end.toISOString()
+		  }));
+		  res.status(200).send(events);
+		}
+	  }
+	);
+  });
+  
+  // create a new event
+  app.post('/events', (req, res) => {
+	const { title, start, end } = req.body;
+	db.query(
+	  "INSERT INTO events (title, start, end) VALUES (?, ?, ?)",
+	  [title, start, end],
+	  (err, result) => {
+		if (err) {
+		  console.log(err);
+		  res.status(500).send('Error creating event');
+		} else {
+		  const newEvent = {
+			id: result.insertId,
+			title,
+			start: start.toISOString(),
+			end: end.toISOString()
+		  };
+		  res.status(200).send(newEvent);
+		}
+	  }
+	);
+  });
+  
 app.get("/login", (req, res) => {
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user });
@@ -68,6 +112,7 @@ app.get('/logout', (req, res) => {
 app.listen(3001, () => {
   console.log("running server");
 });
+
 
 // app.post('/register', (req, res)=>{
 // 	const email = req.body.email;

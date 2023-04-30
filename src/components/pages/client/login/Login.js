@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from 'react';
+import { useState, useEffect} from 'react';
 // import { checkLoggedIn, login, logout } from '../../../../server/auth';
 
 import './Login.css';
@@ -90,7 +90,7 @@ const Login = () => {
   if (user) {
     const userRole = user.role;
   
-    if (userRole === 'admin') {
+    if (userRole === "admin") {
       return (
         <div className="login-container">
           {user.email} is logged in as admin
