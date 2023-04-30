@@ -7,15 +7,14 @@ import Contact from './components/pages/client/contact/Contact';
 import Adminforum from './components/pages/admin/admin-forum/Adminforum';
 import Adminhome from './components/pages/admin/admin-home/Adminhome';
 import AccountCreation from './components/pages/admin/admin-account/AccountCreation';
-import AdminAbout from './components/pages/admin/admin-about/AdminAbout';
 import DiscSymph from './components/pages/client/forum/discussion/DiscSymph/DiscSymph';
-import { UserProvider } from './context/UserContext';
+import DiscMarket from './components/pages/client/forum/discussion/disc-market/DiscMarket';
+import DiscCornhole from './components/pages/client/forum/discussion/disc-cornhole/DiscCornhole';
+import DiscHappy from './components/pages/client/forum/discussion/disc-happy/DiscHappy';
 import Login from './components/pages/client/login/Login';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import ClientNavbar from './components/bars/client-navbar/ClientNavbar';
-import Footer from './components/bars/foot/footer';
 import UserCalendar from './components/pages/client/calendar/UserCalendar';
 import AdminCalendar from './components/pages/admin/admin-calendar/AdminCalendar';
 
@@ -23,7 +22,7 @@ function App() {
   const [role, setRole] = useState(localStorage.getItem('userRole') || '');
 
 
-  const userRole = localStorage.getItem("userRole");
+
 
   useEffect(() => {
     const storedRole = JSON.parse(localStorage.getItem('user'));
@@ -43,6 +42,9 @@ function App() {
         <Route path="/meet" element={<Meet />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/DiscSymph" element={<DiscSymph />} />
+        <Route path="/DiscMarket" element={<DiscMarket />} />
+        <Route path="/DiscCornhole" element={<DiscCornhole />} />
+        <Route path="/DiscHappy" element={<DiscHappy />} />
         <Route path='/login' element={<Login />}/>
 
         {role === 'user' && (

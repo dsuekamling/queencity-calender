@@ -24,21 +24,21 @@ function Forum() {
           <h3>Queen City Market</h3>
           <p className="post-date">May 5th, 2023</p>
           <p className="post-comments">3 comments</p>
-          <a href="#">Join the Discussion</a>
+          <Link to='/DiscMarket'>Join the Discussion</Link>
         </div>
         <div className="forum-post">
           <img src="https://assets3.thrillist.com/v1/image/2834519/1200x630/flatten;crop_down;webp=auto;jpeg_quality=70" alt="Yet another event" />
           <h3>Cornhole Tournament at Triple C Brewing</h3>
           <p className="post-date">May 12th, 2023</p>
           <p className="post-comments">1 comment</p>
-          <a href="#">Join the Discussion</a>
+          <Link to='/DiscCornhole'>Join the Discussion</Link>
         </div>
         <div className="forum-post">
           <img src="https://charlotte.axios.com/wp-content/uploads/2022/07/canopy-outside.jpg" alt="Events galore" />
           <h3>1$ Happy Hour at Canopy Cocktails &amp; Garden</h3>
           <p className="post-date">May 12th, 2023</p>
           <p className="post-comments">1 comment</p>
-          <a href="#">Join the Discussion</a>
+          <Link to='/DiscHappy'>Join the Discussion</Link>
         </div>
       </div>
     </section>

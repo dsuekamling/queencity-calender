@@ -31,7 +31,7 @@ function DiscSymph() {
         </div>
       </li>
       <li className="comment">
-        <img src="user2.jpg" alt="User 2" />
+        <img src="https://media.cnn.com/api/v1/images/stellar/prod/220615162812-02-barbie-movie-gosling.jpg?c=16x9&q=h_720,w_1280,c_fill" alt="User 2" />
         <div className="comment-details">
           <div>
             <p className="username">Ryan Gosling</p>
