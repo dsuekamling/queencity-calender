@@ -1,23 +1,73 @@
-import logo from './logo.svg';
 import './App.css';
+import Casa from './components/pages/client/home/Casa';
+import About from './components/pages/client/about/About';
+import Meet from './components/pages/client/meet/Meet';
+import Forum from './components/pages/client/forum/Forum';
+import Contact from './components/pages/client/contact/Contact';
+import Adminforum from './components/pages/admin/admin-forum/Adminforum';
+import Adminhome from './components/pages/admin/admin-home/Adminhome';
+import AccountCreation from './components/pages/admin/admin-account/AccountCreation';
+import AdminAbout from './components/pages/admin/admin-about/AdminAbout';
+import DiscSymph from './components/pages/client/forum/discussion/DiscSymph/DiscSymph';
+import { UserProvider } from './context/UserContext';
+import Login from './components/pages/client/login/Login';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import ClientNavbar from './components/bars/client-navbar/ClientNavbar';
+import Footer from './components/bars/foot/footer';
+import UserCalendar from './components/pages/client/calendar/UserCalendar';
+import AdminCalendar from './components/pages/admin/admin-calendar/AdminCalendar';
 
 function App() {
+  const [role, setRole] = useState(localStorage.getItem('userRole') || '');
+
+
+  const userRole = localStorage.getItem("userRole");
+
+  useEffect(() => {
+    const storedRole = JSON.parse(localStorage.getItem('user'));
+    if (storedRole) {
+      const role = storedRole[0].role;
+      setRole(role);
+      console.log('Role from local storage:', role);
+    }
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <ClientNavbar /> */}
+      <Routes>
+        <Route path="/" element={<Casa />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/meet" element={<Meet />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/DiscSymph" element={<DiscSymph />} />
+        <Route path='/login' element={<Login />}/>
+
+        {role === 'user' && (
+          <>
+            <Route path="/forum" element={<Forum />} />
+            <Route path="/calendar" element={<UserCalendar />} />
+          </>
+        )}
+
+        {role === 'admin' && (
+          <>
+            <Route path="/adminforum" element={<Adminforum />} />
+            <Route path="/adminhome" element={<Adminhome />} />
+            <Route path="/adminaccount-creation" element={<AccountCreation />} />
+            <Route path="/admincalendar" element={<AdminCalendar />} />
+          </>
+        )}
+
+        {!role && (
+          <>
+            <Route path="/forum" element={<Forum />} />
+            <Route path="/calendar" element={<UserCalendar />} />
+          </>
+        )}
+      </Routes>
     </div>
   );
 }

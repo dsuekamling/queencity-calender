@@ -1,0 +1,79 @@
+  /* ---------------------------------------------------------------------------------------------
+                                        Login Form
+  -----------------------------------------------------------------------------------------------*/
+  
+  .login-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    text-align: center;
+    margin-top:80px;
+  }
+  
+  .login-container h2 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  
+  input,
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  button[type="submit"] {
+    background-color: #f47b06;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #e35b00;
+  }
+  
+  .forgot-password {
+    margin-top: 20px;
+  }
+  
+  .forgot-password a {
+    color: #f47b06;
+    text-decoration: none;
+  }
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+
+  .background {
+    background-image: url('https://lp-cms-production.imgix.net/2022-02/Charlotte%20NC-shutterstock_1841167135%20RF%20Editorial.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
