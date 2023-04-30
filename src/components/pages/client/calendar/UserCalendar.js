@@ -18,7 +18,7 @@ const UserCalendar = () => {
   const handleEventClick = (clickInfo) => {
     alert(clickInfo.event.title);
   };
-  console.log(events);
+//   console.log(events);
 
   return (
     <FullCalendar
@@ -31,7 +31,7 @@ const UserCalendar = () => {
         end: event.end,
         url: event.url
       }))}
-      eventClick={handleEventClick}
+    //   eventClick={handleEventClick}
     />
   );
 };

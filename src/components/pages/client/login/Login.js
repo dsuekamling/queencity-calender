@@ -51,8 +51,6 @@ const Login = () => {
     }
   };
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = { email, password };
@@ -87,13 +85,15 @@ const Login = () => {
     }
   };
   
+  
   if (user) {
     const userRole = user.role;
-  
+    const userName = user.email;
+
     if (userRole === "admin") {
       return (
         <div className="login-container">
-          {user.email} is logged in as admin
+          {userName} is logged in as admin
           <button onClick={handleLogout}>logout</button>
           <Link to="/adminhome">Go to Admin Page</Link>
         </div>
@@ -101,7 +101,7 @@ const Login = () => {
     } else {
       return (
         <div className="login-container">
-          {user.email} is logged in
+          {userName} is logged in
           <button onClick={handleLogout}>logout</button>
           <Link to="/">Go to Home Page</Link>
         </div>

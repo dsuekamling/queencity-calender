@@ -24,50 +24,61 @@ const db = mysql.createConnection({
   database: "Capstone",
 });
 
+// Your admin role code here
+const isAdmin = (req, res, next) => {
+  // Check if the user is an admin
+  if (req.session.user && req.session.user.role === 'admin') {
+    next();
+  } else {
+    res.status(401).send('Unauthorized');
+  }
+};
+
 // retrieve events
 app.get('/events', (req, res) => {
-	db.query(
-	  "SELECT id, title, start, end FROM events",
-	  (err, result) => {
-		if (err) {
-		  console.log(err);
-		  res.status(500).send('Error retrieving events');
-		} else {
-		  const events = result.map(event => ({
-			id: event.id,
-			title: event.title,
-			start: event.start.toISOString(),
-			end: event.end.toISOString()
-		  }));
-		  res.status(200).send(events);
-		}
-	  }
-	);
-  });
-  
-  // create a new event
-  app.post('/events', (req, res) => {
-	const { title, start, end } = req.body;
-	db.query(
-	  "INSERT INTO events (title, start, end) VALUES (?, ?, ?)",
-	  [title, start, end],
-	  (err, result) => {
-		if (err) {
-		  console.log(err);
-		  res.status(500).send('Error creating event');
-		} else {
-		  const newEvent = {
-			id: result.insertId,
-			title,
-			start: start.toISOString(),
-			end: end.toISOString()
-		  };
-		  res.status(200).send(newEvent);
-		}
-	  }
-	);
-  });
-  
+  db.query(
+    "SELECT id, title, start, end, url FROM events",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('Error retrieving events');
+      } else {
+        const events = result.map(event => ({
+          id: event.id,
+          title: event.title,
+          start: event.start.toISOString(),
+          end: event.end.toISOString(),
+          url: event.url
+        }));
+        res.status(200).send(events);
+      }
+    }
+  );
+});
+
+// create a new event, only accessible to admins
+app.post('/events', isAdmin, (req, res) => {
+  const { title, start, end } = req.body;
+  db.query(
+    "INSERT INTO events (title, start, end) VALUES (?, ?, ?)",
+    [title, start, end],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('Error creating event');
+      } else {
+        const newEvent = {
+          id: result.insertId,
+          title,
+          start: start.toISOString(),
+          end: end.toISOString()
+        };
+        res.status(200).send(newEvent);
+      }
+    }
+  );
+});
+
 app.get("/login", (req, res) => {
   if (req.session.user) {
     res.send({ loggedIn: true, user: req.session.user });
